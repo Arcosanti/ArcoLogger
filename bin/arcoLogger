@@ -1,0 +1,44 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		arcoLogger
+# Default-Start:	2 3 4 5
+# Default-Stop:		
+# Short-Description:	Arcosanti Sensor Logger
+### END INIT INFO
+
+#arcologger=/opt/arcoLogger/bin/arcoLogger.js
+arcologger=~pi/dev/arcoLogger/bin/arcoLogger.js
+node=/opt/bin/node
+logfile=/var/log/arcoLogger.log
+
+#set -e
+
+# /etc/init.d/arcoLogger: start and stop the Arcosanti "Logger" application
+
+test -x $arcologger || echo "Could not find arcoLogger" && exit 0
+
+case "$1" in
+  start)
+    echo "Starting arcoLogger..."
+    `$node $arcologger 2>$logfile` || exit 0
+
+	;;
+  stop)
+    echo "Stop not yet supported!"
+	;;
+
+  restart)
+    echo "Restart not yet supported!"
+	;;
+
+  status)
+    echo "Status not yet supported!"
+	;;
+
+  *)
+    echo "Try starting!"
+	exit 1
+esac
+
+exit 0
